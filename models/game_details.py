@@ -1,13 +1,13 @@
-from enum import Enum
+from enum import StrEnum
 from pydantic import BaseModel, NonNegativeInt, conlist, PositiveInt, conint
 from datetime import datetime
 
-class Role(Enum):
-    top = "top"
-    jungle = "jungle"
-    mid = "mid"
-    bottom = "bottom"
-    support = "support"
+class Role(StrEnum):
+    TOP = "top"
+    JUNGLE = "jungle"
+    MID = "mid"
+    BOTTOM = "bottom"
+    SUPPORT = "support"
 
 class Participant(BaseModel):
     participantId: PositiveInt
@@ -25,16 +25,17 @@ class Metadata(BaseModel):
     blueTeamMetadata: TeamMetadata
     redTeamMetadata: TeamMetadata
 
-class GameState(Enum):
-    in_game = "in_game"
-    finished = "finished"
+class GameState(StrEnum):
+    IN_GAME = "in_game"
+    FINISHED = "finished"
 
-class Dragon(Enum):
-    infernal = "infernal"
-    hextech = "hextech"
-    mountain = "mountain"
-    cloud = "cloud"
-    ocean = "ocean"
+class Dragon(StrEnum):
+    INFERNAL = "infernal"
+    HEXTECH = "hextech"
+    MOUNTAIN = "mountain"
+    CLOUD = "cloud"
+    OCEAN = "ocean"
+    CHEMTECH = "chemtech"
 
 class ParticipantStats(BaseModel):
     participantId: NonNegativeInt

@@ -1,17 +1,16 @@
 import json
-from enum import Enum
-from pydantic import BaseModel, NonNegativeInt, conlist, HttpUrl, PositiveInt, \
-    constr, Field
+from enum import StrEnum
+from pydantic import BaseModel, NonNegativeInt, conlist, HttpUrl, PositiveInt
 from typing import Optional, Literal
 from datetime import datetime
 
-class EventState(Enum):
-    completed = "completed"
-    unstarted = "unstarted"
+class EventState(StrEnum):
+    COMPLETED = "completed"
+    UNSTARTED = "unstarted"
 
-class Outcome(Enum):
-    loss = "loss"
-    win = "win"
+class Outcome(StrEnum):
+    LOSS = "loss"
+    WIN = "win"
 
 class Pages(BaseModel):
     older: Optional[str]

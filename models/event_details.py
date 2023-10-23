@@ -1,4 +1,4 @@
-from enum import Enum
+from enum import StrEnum
 from pydantic import BaseModel, NonNegativeInt, conlist, HttpUrl, PositiveInt
 from typing import Optional, Literal
 from datetime import datetime
@@ -25,14 +25,14 @@ class Team(BaseModel):
     image: HttpUrl
     result: Optional[Result]
 
-class GameState(Enum):
-    completed = "completed"
-    unneeded = "unneeded"
-    unstarted = "unstarted"
+class GameState(StrEnum):
+    COMPLETED = "completed"
+    UNNEEDED = "unneeded"
+    UNSTARTED = "unstarted"
 
-class Side(Enum):
-    blue = "blue"
-    red = "red"
+class Side(StrEnum):
+    BLUE = "blue"
+    RED = "red"
 
 class ShortTeam(BaseModel):
     id: NonNegativeInt
@@ -66,7 +66,7 @@ class Match(BaseModel):
     teams: conlist(Team, min_length=2, max_length=2)
     games: list[Game]
 
-class Event(BaseModel):
+class EventDetails(BaseModel):
     id: NonNegativeInt
     type: Literal["match"]
     tournament: Tournament
