@@ -5,8 +5,10 @@ name = "pypi"
 
 [packages]
 pydantic = "*"
+httpx = "*"
 
 [dev-packages]
+rich = "*"
 
 [requires]
 python_version = "3.11"
