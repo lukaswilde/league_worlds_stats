@@ -9,6 +9,7 @@ httpx = "*"
 
 [dev-packages]
 rich = "*"
+pre-commit = "*"
 
 [requires]
 python_version = "3.11"
