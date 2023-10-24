@@ -1,16 +1,20 @@
 import json
-import httpx
 from datetime import datetime
+
+import httpx
+
 from models.event_details import EventDetails
 from models.game_details import GameDetails
 from models.schedule import Schedule
 
 API_KEY = "0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z"
-WORLDS_ID = 98767975604431411   # for world championship
+WORLDS_ID = 98767975604431411  # for world championship
 
-class LeagueRequestHandler():
+
+class LeagueRequestHandler:
     _api_key: str
     _league_id: int
+
     def __init__(self, api_key: str, league_id: int):
         self._api_key = api_key
         self._league_id = league_id
@@ -35,7 +39,7 @@ class LeagueRequestHandler():
     def get_window(self, game_id: int, starting_time: datetime = None) -> GameDetails:
         url = f"https://feed.lolesports.com/livestats/v1/window/{game_id}"
         params = dict()
-        params["startingTime"] =  starting_time
+        params["startingTime"] = starting_time
         response = httpx.get(url, params=params)
         window = response.json()
         return GameDetails(**window)

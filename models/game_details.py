@@ -1,6 +1,8 @@
-from enum import StrEnum
-from pydantic import BaseModel, NonNegativeInt, conlist, PositiveInt, conint
 from datetime import datetime
+from enum import StrEnum
+
+from pydantic import BaseModel, NonNegativeInt, PositiveInt, conint, conlist
+
 
 class Role(StrEnum):
     TOP = "top"
@@ -9,6 +11,7 @@ class Role(StrEnum):
     BOTTOM = "bottom"
     SUPPORT = "support"
 
+
 class Participant(BaseModel):
     participantId: PositiveInt
     esportsPlayerId: NonNegativeInt
@@ -16,18 +19,22 @@ class Participant(BaseModel):
     championId: str
     role: Role
 
+
 class TeamMetadata(BaseModel):
     esportsTeamId: NonNegativeInt
     participantMetadata: conlist(Participant, min_length=5, max_length=5)
+
 
 class Metadata(BaseModel):
     patchVersion: str
     blueTeamMetadata: TeamMetadata
     redTeamMetadata: TeamMetadata
 
+
 class GameState(StrEnum):
     IN_GAME = "in_game"
     FINISHED = "finished"
+
 
 class Dragon(StrEnum):
     INFERNAL = "infernal"
@@ -36,6 +43,7 @@ class Dragon(StrEnum):
     CLOUD = "cloud"
     OCEAN = "ocean"
     CHEMTECH = "chemtech"
+
 
 class ParticipantStats(BaseModel):
     participantId: NonNegativeInt
@@ -48,6 +56,7 @@ class ParticipantStats(BaseModel):
     currentHealth: NonNegativeInt
     maxHealth: NonNegativeInt
 
+
 class TeamStats(BaseModel):
     totalGold: NonNegativeInt
     inhibitors: conint(ge=0, le=3)
@@ -57,11 +66,13 @@ class TeamStats(BaseModel):
     dragons: conlist(Dragon, min_length=0, max_length=4)
     participants: conlist(ParticipantStats, min_length=5, max_length=5)
 
+
 class Frame(BaseModel):
     rfc460Timestamp: datetime
     gameState: GameState
     blueTeam: TeamStats
     redTeam: TeamStats
+
 
 class GameDetails(BaseModel):
     esportsGameId: NonNegativeInt
